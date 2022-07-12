@@ -10,7 +10,7 @@ from .views import (
     APISignUp,
     APIToken,
     UsersViewSet,
-    )
+)
 
 
 app_name = 'api'

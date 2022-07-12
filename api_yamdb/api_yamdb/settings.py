@@ -6,7 +6,7 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', '*')
 
 DEBUG = False
 
-ALLOWED_HOSTS = ['51.250.110.151',]
+ALLOWED_HOSTS = ['51.250.110.151']
 
 EMAIL_FROM = 'apiyamdb@example.ru.'
 
@@ -106,7 +106,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-gMEDIA_URL = '/media/'
+MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 REST_FRAMEWORK = {
