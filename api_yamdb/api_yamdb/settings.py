@@ -6,7 +6,7 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', '*')
 
 DEBUG = False
 
-ALLOWED_HOSTS = ['158.160.3.218']
+ALLOWED_HOSTS = ['84.252.137.246']
 
 EMAIL_FROM = 'apiyamdb@example.ru.'
 
