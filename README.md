@@ -1,4 +1,5 @@
-[![yamdb_final workflow](https://github.com/irinaexcellent/yamdb_final/workflows/yamdb_final%20workflow/badge.svg)](https://github.com/irinaexcellent/yamdb_final/actions?query=workflow%3A%22yamdb_final+workflow%22)
+![example workflow](https://github.com/github/docs/actions/workflows/main.yml/badge.svg)
+
 # О ПРОЕКТЕ
 
 Проект yamdb_final создан для демонстрации методики увеличения скорости, качества и безопасности разработки DevOps (Development Operations) и идеи Continuous Integration (CI),
