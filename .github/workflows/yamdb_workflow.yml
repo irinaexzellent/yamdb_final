@@ -59,6 +59,7 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           passphrase: ${{ secrets.PASSPHRASE }}
           script: |
+            docker pull irinaexcellent/api_yamdb
             sudo docker compose stop
             sudo docker compose rm web
             touch .env
