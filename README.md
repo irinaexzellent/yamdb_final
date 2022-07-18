@@ -1,4 +1,4 @@
-![example workflow](https://github.com/github/docs/actions/workflows/main.yml/badge.svg)
+![example workflow](https://github.com/irinaexzellent/yamdb_final/actions/workflows/yamdb_workflow.yml/badge.svg)
 
 # О ПРОЕКТЕ
 
@@ -24,7 +24,7 @@
 git clone https://github.com/irinaexzellent/yamdb_final
 ```
 
-2. Добавить файл .env с настройками базы данных на сервер:
+2. Добавить файл .env с настройками базы данных на сервер, для этого:
 
 * Установить соединение с сервером по протоколу ssh:
     ```
@@ -45,7 +45,7 @@ git clone https://github.com/irinaexzellent/yamdb_final
     ```
     В папке **yamdb_final** создать файл **.env**:
     ```
-    touch www/yamdb_final/.env
+    touch new_directory/yamdb_final/.env
     ```
 
 * Добавить настройки в файл **.env**:
@@ -56,8 +56,8 @@ git clone https://github.com/irinaexzellent/yamdb_final
     ```
     DB_ENGINE=django.db.backends.postgresql
     DB_NAME=postgres
-    POSTGRES_USER=new_user
-    POSTGRES_PASSWORD=new_password
+    POSTGRES_USER=new_user(установить свой)
+    POSTGRES_PASSWORD=new_password(установить свой)
     DB_HOST=postgres
     DB_PORT=5432
     ```
@@ -100,33 +100,26 @@ ssh username@server_address
 ```
 sudo docker container ls
 ```
-В списке контейнеров копировать CONTAINER ID контейнера username/yamdb_final_web:latest (username - имя пользователя на DockerHub):
+Статус контейнеров будет в состоянии Up:
 ```
-CONTAINER ID   IMAGE                            COMMAND                  CREATED          STATUS          PORTS                NAMES
-0361a982109d   nginx:1.19.6                     "/docker-entrypoint.…"   50 minutes ago   Up 50 minutes   0.0.0.0:80->80/tcp   yamdb_final_nginx_1
-a47ce31d4b7b   username/yamdb_final_web:latest  "/bin/sh -c 'gunicor…"   50 minutes ago   Up 50 minutes                        yamdb_final_web_1
-aed19f6751f3   postgres:13.1                    "docker-entrypoint.s…"   50 minutes ago   Up 50 minutes   5432/tcp             yamdb_final_postgres_1
+CONTAINER ID   IMAGE                             COMMAND                  CREATED          STATUS          PORTS                               NAMES
+0e71c6c6234c   nginx:1.21.3-alpine               "/docker-entrypoint.…"   39 minutes ago   Up 39 minutes   0.0.0.0:80->80/tcp, :::80->80/tcp   irina-nginx-1
+616ca90cb80a   irinaexcellent/api_yamdb:latest   "gunicorn api_yamdb.…"   39 minutes ago   Up 39 minutes                                       irina-web-1
+5e0bbb3354ee   postgres:13.0-alpine              "docker-entrypoint.s…"   39 minutes ago   Up 39 minutes   5432/tcp                            irina-db-1
 ```
-Выполнить вход в контейнер:
+Выполнить миграции в контейнере web:
 ```
-sudo docker exec -it a47ce31d4b7b bash
+sudo docker compose exec web python manage.py migrate
 ```
-Выполнить миграции внутри контейнера:
-```
-python manage.py migrate
-```
+
 Наполнить базу данных начальными тестовыми данными:
 ```
-python3 manage.py shell
->>> from django.contrib.contenttypes.models import ContentType
->>> ContentType.objects.all().delete()
->>> quit()
-python manage.py loaddata dump.json
+sudo docker compose exec web python manage.py > dump.json
 ```
 
 Для создания нового суперпользователя можно выполнить команду:
 ```
-$ python manage.py createsuperuser
+sudo docker compose exec web python manage.py createsuperuser
 ```
 и далее указать: 
 ```
@@ -137,17 +130,17 @@ Password (again):
 ```
 Для обращения к API проекта:
 
-* http://IP-сервера/api/v1/auth/token/
-* http://IP-сервера/api/v1/users/
-* http://IP-сервера/api/v1/categories/
-* http://IP-сервера/api/v1/genres/
-* http://IP-сервера/api/v1/titles/
-* http://IP-сервера/api/v1/titles/{title_id}/reviews/
-* http://IP-сервера/api/v1/titles/{title_id}/reviews/{review_id}/
-* http://IP-сервера/api/v1/titles/{title_id}/reviews/{review_id}/comments/
+* http://158.160.2.160/api/v1/auth/token/
+* http://158.160.2.160/api/v1/users/
+* http://158.160.2.160/api/v1/categories/
+* http://158.160.2.160/api/v1/genres/
+* http://158.160.2.160/api/v1/titles/
+* http://158.160.2.160/api/v1/titles/{title_id}/reviews/
+* http://158.160.2.160/api/v1/titles/{title_id}/reviews/{review_id}/
+* http://158.160.2.160/api/v1/titles/{title_id}/reviews/{review_id}/comments/
 
 Cписок и подробное описание доступных запросов к приложению можно посмотреть:
-* http://IP-сервера/redoc/
+* http://158.160.2.160/redoc/
 
 Для остановки и удаления контейнеров и образов на сервере:
 ```
