@@ -23,46 +23,7 @@
 ```
 git clone https://github.com/irinaexzellent/yamdb_final
 ```
-
-2. Добавить файл .env с настройками базы данных на сервер, для этого:
-
-* Установить соединение с сервером по протоколу ssh:
-    ```
-    ssh username@server_address
-    ```
-    username - имя пользователя, под которым будет выполнено подключение к серверу,
-    
-    server_address - IP-адрес сервера или доменное имя.
-    ```
-* В домашней директории проекта
-    Создать папку **new_directory/**:
-    ```
-    mkdir new_directory
-    ```
-    В папке **new_directory** создать папку **yamdb_final/**:
-    ```
-    mkdir new_directory/yamdb_final
-    ```
-    В папке **yamdb_final** создать файл **.env**:
-    ```
-    touch new_directory/yamdb_final/.env
-    ```
-
-* Добавить настройки в файл **.env**:
-    ```
-    sudo nano new_directory/yamdb_final/.env
-    ```
-    Пример добавляемых настроек:
-    ```
-    DB_ENGINE=django.db.backends.postgresql
-    DB_NAME=postgres
-    POSTGRES_USER=new_user(установить свой)
-    POSTGRES_PASSWORD=new_password(установить свой)
-    DB_HOST=postgres
-    DB_PORT=5432
-    ```
-
-* Добавить Action secrets в репозитории на GitHub в разделе settings -> Secrets:
+2. Добавить **Action secrets** в репозитории на GitHub в разделе settings -> Secrets:
 
 ```
 DOCKER_PASSWORD - пароль от DockerHub;
@@ -71,9 +32,23 @@ HOST - ip-адрес сервера;
 SSH_KEY - приватный ssh ключ (публичный должен быть на сервере);
 TELEGRAM_TO - id своего телеграм-аккаунта (можно узнать у @userinfobot, команда /start)
 TELEGRAM_TOKEN - токен бота (получить токен можно у @BotFather, /token, имя бота)
+DB_ENGINE=django.db.backends.postgresql
+DB_NAME=postgres
+POSTGRES_USER=new_user(установить свой)
+POSTGRES_PASSWORD=new_password(установить свой)
+DB_HOST=postgres
+DB_PORT=5432
+```
+3. Установить соединение с сервером по протоколу ssh:
+```
+ssh username@server_address
+```
+username - имя пользователя, под которым будет выполнено подключение к серверу,
+    
+server_address - IP-адрес сервера или доменное имя.
 ```
 *  Добавить файлы docker-compose.yaml и nginx/default.conf из проекта на сервер в home/<ваш_username>/docker-compose.yaml и home/<ваш_username>/nginx/default.conf соответственно
-
+```
 # Проверка работы приложения
 
 Внести любые изменения в проект и выполнить:
